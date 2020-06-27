@@ -17,12 +17,11 @@ io.on('connection',(socket)=>{
 
     socket.on('createMessage',(message)=>{
         console.log('CreateMessage',message);
-    });
-
-    socket.emit('newMessage',{
-        from: 'master',
-        text: 'excellence',
-        createdAt: 1212
+        io.emit('newMessage',{
+            from: message.from,
+            text: message.text,
+            createdAt: new Date().getTime()
+        });
     });
 });
 
