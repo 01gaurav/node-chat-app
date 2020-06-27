@@ -9,10 +9,20 @@ var app = express();
 var server = http.createServer(app);
 var io = socketIO(server);
 io.on('connection',(socket)=>{
-    console.log('New user connected');
-
+    console.log('New user Connected');
+    
     socket.on('disconnect',()=>{
-        console.log('User was disconnected')
+        console.log('User was Disconnected')
+    });
+
+    socket.on('createMessage',(message)=>{
+        console.log('CreateMessage',message);
+    });
+
+    socket.emit('newMessage',{
+        from: 'master',
+        text: 'excellence',
+        createdAt: 1212
     });
 });
 
